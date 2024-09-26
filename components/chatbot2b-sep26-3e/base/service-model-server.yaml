@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app.kubernetes.io/instance: chatbot2b-sep26-3e-model-server
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: chatbot2b-sep26-3e-model-server
+  name: chatbot2b-sep26-3e-model-server
+spec:
+  ports:
+  - port: 8001
+    protocol: TCP
+    targetPort: 8001
+  selector:
+    app.kubernetes.io/instance: chatbot2b-sep26-3e-model-server

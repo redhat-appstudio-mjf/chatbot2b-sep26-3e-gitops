@@ -1,0 +1,6 @@
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: chatbot2b-sep26-3e-gitops-repository
+spec:
+  url: https://github.com/redhat-appstudio-mjf/chatbot2b-sep26-3e-gitops

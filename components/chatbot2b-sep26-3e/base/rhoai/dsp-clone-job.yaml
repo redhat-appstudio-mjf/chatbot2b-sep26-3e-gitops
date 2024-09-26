@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dsp-clone-job-chatbot2b-sep26-3e-gitops
+spec:  
+  template:         
+    metadata:
+      name: dsp-clone-job-chatbot2b-sep26-3e-gitops
+    spec:  
+      serviceAccountName: chatbot2b-sep26-3e-dsp-job
+      containers:
+      - name: initialize-dsp
+        image: quay.io/redhat-ai-dev/utils:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+          oc wait -l statefulset=chatbot2b-sep26-3e-notebook --for=condition=ready pod --timeout=300s
+          oc exec  StatefulSet/chatbot2b-sep26-3e-notebook -- git clone https://github.com/redhat-appstudio-mjf/chatbot2b-sep26-3e
+      restartPolicy: Never
